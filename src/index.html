@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Video Streaming and Chatroom</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <link rel="icon" href="assets/favicon.ico">
+    <link rel="stylesheet" href="assets/style.css">
+
+    <script type="text/javascript" crossorigin="anonymous"
+        src="https://cdn.jsdelivr.net/npm/clappr/dist/clappr.min.js"></script>
+    <script type="text/javascript" crossorigin="anonymous"
+        src="https://cdn.jsdelivr.net/npm/clappr-stats/dist/clappr-stats.min.js"></script>
+    <script type="text/javascript" crossorigin="anonymous"
+        src="https://cdn.jsdelivr.net/npm/clappr-nerd-stats/dist/clappr-nerd-stats.min.js"></script>
+    <script type="text/javascript" crossorigin="anonymous"
+        src="https://cdn.jsdelivr.net/npm/clappr-pip-plugin/dist/clappr-pip-plugin.js"></script>
+
+    <script src="./script.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</head>
+</head>
+
+<body>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light hd">
+        <marquee><a class="navbar-brand" href="#">Welcome to Live Video Streaming!</a></marquee>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8">
+                <div id="player"></div>
+            </div>
+            <div class="col-lg-4">
+
+
+                <div id="chatroom" mx-auto>
+                    <ul id="messages"></ul>
+                </div>
+                <form onsubmit="sendMessage(event)">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="username" placeholder="Username" required>
+                        <input type="text" class="form-control" id="message" placeholder="Type your message here..."
+                            required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-light text-center">
+        <p>&copy; 2023 Live Video Streaming and Chat.</p>
+    </footer>
+
+</body>
+<script>
+    new Clappr.Player({
+
+        //** Standard clappr.io Options **
+        // Use custom source
+        sources: ["hls/live.m3u8"],
+
+        // Plugins
+        plugins: [ClapprNerdStats, ClapprStats, ClapprPIPPlugin],
+        clapprNerdStats: {
+            iconPosition: 'none'
+        },
+
+        // Disable m3u8 preload to prevent error on page load
+        hlsPlayback: {
+            preload: false
+        },
+
+        // Set a custom poster
+        poster: "assets/ucr.jpg",
+
+        // Assign parent by id
+        parentId: "#player",
+
+        // Set dimensions and media control delay
+        height: "100%",
+        width: "100%",
+        hideMediaControlDelay: 1000
+    })
+</script>
+
+</html>
